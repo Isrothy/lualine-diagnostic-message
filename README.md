@@ -3,6 +3,7 @@
 Show LSP diagnostic message on lualine
 
 ## Screenshot
+<img width="1438" alt="image" src="https://user-images.githubusercontent.com/61075605/213876470-98d47e09-16fc-4994-88e0-550dffc32a1a.png">
 
 ## Installation
 
