@@ -25,10 +25,17 @@ diagnostics_message.default = {
 			"#273faf"
 		),
 	},
+	icons = {
+		error = " ",
+		warn = " ",
+		info = " ",
+		hint = " ",
+	},
 }
 function diagnostics_message:init(options)
 	diagnostics_message.super:init(options)
 	self.options.colors = vim.tbl_extend("force", diagnostics_message.default.colors, self.options.colors or {})
+	self.options.icons = vim.tbl_extend("force", diagnostics_message.default.icons, self.options.icons or {})
 	self.highlights = { error = "", warn = "", info = "", hint = "" }
 	self.highlights.error = highlight.create_component_highlight_group(
 		{ fg = self.options.colors.error },
@@ -62,7 +69,12 @@ function diagnostics_message:update_status(is_focused)
 				top = d
 			end
 		end
-		local icons = { " ", " ", " ", " " }
+		local icons = {
+			self.options.icons.error,
+			self.options.icons.warn,
+			self.options.icons.info,
+			self.options.icons.hint,
+		}
 		local hl = {
 			self.highlights.error,
 			self.highlights.warn,
