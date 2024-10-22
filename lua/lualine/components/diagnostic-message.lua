@@ -84,7 +84,7 @@ function diagnostics_message:update_status(is_focused)
 		return highlight.component_format_highlight(hl[top.severity])
 			.. icons[top.severity]
 			.. " "
-			.. utils.stl_escape(top.message:gsub("[%c]", ""))
+			.. utils.stl_escape(top.message:gsub("[\n]", ". "):gsub("[%c]", ""))
 	else
 		return ""
 	end
