@@ -43,6 +43,8 @@ require'lualine'.setup{
                 info = "I",
                 hint = "H",
             }
+            -- Replace '\n' by the separator
+            line_separator = ". ",
         }
     }
 }

@@ -31,11 +31,11 @@ diagnostics_message.default = {
 		info = " ",
 		hint = " ",
 	},
+	line_separator = ". ",
 }
 function diagnostics_message:init(options)
 	diagnostics_message.super:init(options)
-	self.options.colors = vim.tbl_extend("force", diagnostics_message.default.colors, self.options.colors or {})
-	self.options.icons = vim.tbl_extend("force", diagnostics_message.default.icons, self.options.icons or {})
+	self.options = vim.tbl_extend("force", diagnostics_message.default, options or {})
 	self.highlights = { error = "", warn = "", info = "", hint = "" }
 	self.highlights.error = highlight.create_component_highlight_group(
 		{ fg = self.options.colors.error },
@@ -84,7 +84,7 @@ function diagnostics_message:update_status(is_focused)
 		return highlight.component_format_highlight(hl[top.severity])
 			.. icons[top.severity]
 			.. " "
-			.. utils.stl_escape(top.message:gsub("[\n]", ". "):gsub("[%c]", ""))
+			.. utils.stl_escape(top.message:gsub("[\n]", self.options.line_separator):gsub("[%c]", ""))
 	else
 		return ""
 	end
