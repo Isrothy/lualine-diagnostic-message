@@ -32,6 +32,7 @@ diagnostics_message.default = {
 		hint = " ",
 	},
 	line_separator = ". ",
+	first_line_only = false,
 }
 function diagnostics_message:init(options)
 	diagnostics_message.super:init(options)
@@ -81,10 +82,14 @@ function diagnostics_message:update_status(is_focused)
 			self.highlights.info,
 			self.highlights.hint,
 		}
+		local message = top.message
+		if self.options.first_line_only then
+			message = message:match("[^\n]+")
+		end
 		return highlight.component_format_highlight(hl[top.severity])
 			.. icons[top.severity]
 			.. " "
-			.. utils.stl_escape(top.message:gsub("[\n]", self.options.line_separator):gsub("[%c]", ""))
+			.. utils.stl_escape(message:gsub("[\n]", self.options.line_separator):gsub("[%c]", ""))
 	else
 		return ""
 	end

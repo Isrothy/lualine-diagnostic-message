@@ -45,6 +45,9 @@ require'lualine'.setup{
             }
             -- Replace '\n' by the separator
             line_separator = ". ",
+
+            -- Only show the first line of diagnostic message
+            first_line_only = false,
         }
     }
 }
